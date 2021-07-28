@@ -18,6 +18,8 @@ import Fund from './app/fund/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Signup from './app/Auth/Signup';
 import Signin from './app/Auth/Signin';
+import Details from './app/Home/Details';
+import BamScreen from './app/Home/BamScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -111,7 +113,7 @@ const AuthStack = () => (
 const App = () => {
   return true ? (
     <NavigationContainer>
-      {true ? (
+      {false ? (
         <AuthStack />
       ) : (
         <Stack.Navigator
@@ -119,6 +121,8 @@ const App = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Home" component={TabNav} />
+          <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="BamScreen" component={BamScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
