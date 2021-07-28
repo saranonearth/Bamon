@@ -10,13 +10,17 @@ import {
 } from 'react-native';
 import UI from '../constants/UI';
 import {Text as Texti} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Feather';
 
-const PocketCompoment = ({handleBamPress}) => (
+const PocketCompoment = ({data, handleBamPress}) => (
   <View style={styles.pocketContainer}>
-    <View>
-      <Text style={{fontWeight: '700', fontSize: 16}}>Pocket Name</Text>
-      <Text>Available: ₹1000</Text>
+    <View style={{display: 'flex', flexDirection: 'row'}}>
+      <View style={styles.rect}></View>
+      <View>
+        <Text style={{fontWeight: '700', fontSize: 16}}>
+          {data.pocket_name}
+        </Text>
+        <Text>Available: ₹{data.available}</Text>
+      </View>
     </View>
 
     <View>
@@ -31,7 +35,11 @@ export default function Home({navigation}) {
   const [bamToggle, setBamToggle] = React.useState(true);
 
   function handleBamPress() {
-    navigation.navigate('BamScreen');
+    navigation.navigate('BamScreen', {
+      otherParam: {
+        payback_mode: false,
+      },
+    });
   }
   return (
     <View style={styles.container}>
@@ -82,23 +90,12 @@ export default function Home({navigation}) {
             showsVerticalScrollIndicator={false}
             style={{flexGrow: 1}}
             data={[
-              {name: 'sarsw'},
-              {name: 'saresw'},
-              {name: 'sarsedw'},
-              {name: 'sagrsw'},
-              {name: 'sarsefw'},
-              {name: 'sarfdsw'},
-              {name: 'saraw'},
-              {name: 'saran3'},
-              {name: 'saran3'},
-              {name: 'saran3'},
-              {name: 'saran3'},
-              {name: 'sarfban3'},
-              {name: 'sareran3'},
+              {id: 'XVDNGJ', pocket_name: 'Piggy Pong', available: '1300'},
+              {id: 'XVDNGXJ', pocket_name: `Dhruv's Pocket`, available: '700'},
             ]}
             keyExtractor={m => Math.random().toString()}
             renderItem={({item}) => (
-              <PocketCompoment handleBamPress={handleBamPress} />
+              <PocketCompoment data={item} handleBamPress={handleBamPress} />
             )}
           />
         </View>
@@ -193,5 +190,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  rect: {
+    backgroundColor: UI.APP_COLOR,
+    height: 40,
+    width: 6,
+    borderRadius: 5,
+    marginRight: 5,
   },
 });
