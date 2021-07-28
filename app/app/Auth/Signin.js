@@ -3,9 +3,15 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import UI from '../constants/UI';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Store from '../Store/Store';
 export default function Signin({navigation}) {
+  const {state, dispatch} = React.useContext(Store);
   function handleLoginPress() {
     console.log('Login Clicked');
+    dispatch({
+      type: 'LOGIN',
+      payload: null,
+    });
   }
 
   function handleNewSignUp() {

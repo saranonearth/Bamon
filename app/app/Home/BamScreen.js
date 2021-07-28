@@ -38,7 +38,7 @@ export default function BamScreen({route, navigation}) {
             containerStyle={{marginTop: 20}}
             inputContainerStyle={styles.amountInput}
             placeholder="0"
-            inputStyle={{fontSize: 30, fontWeight: 'bold34'}}
+            inputStyle={{fontSize: 30, fontWeight: 'bold'}}
             leftIcon={
               <Text style={{fontSize: 40, color: UI.GREY, marginTop: -5}}>
                 ₹

@@ -11,6 +11,8 @@ import {
 import UI from '../constants/UI';
 import {Text as Texti} from 'react-native-elements';
 
+import Store from '../Store/Store';
+
 const PocketCompoment = ({payback, data, handleBamPress}) => (
   <View style={styles.pocketContainer}>
     <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -36,6 +38,8 @@ const PocketCompoment = ({payback, data, handleBamPress}) => (
 );
 
 export default function Profile({navigation}) {
+  const {_, dispatch} = React.useContext(Store);
+
   function handleBamPress() {
     navigation.navigate('BamScreen', {
       otherParam: {
@@ -45,7 +49,10 @@ export default function Profile({navigation}) {
   }
 
   function handleLogout() {
-    navigation.navigate('Login');
+    dispatch({
+      type: 'LOGOUT',
+      payload: null,
+    });
   }
   return (
     <View style={styles.container}>

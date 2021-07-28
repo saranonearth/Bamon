@@ -12,7 +12,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Reducer from './app/Store/Reducer';
+import reducer from './app/Store/Reducer';
 import Store from './app/Store/Store';
 import Home from './app/Home/index';
 import Profile from './app/profile/index';
@@ -115,32 +115,30 @@ const AuthStack = () => (
 
 const App = () => {
   const initialState = React.useContext(Store);
-  const [state, dispatch] = React.useReducer(Reducer, initialState);
-
-  return (
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  console.log(state);
+  return true ? (
     //@ts-ignore
     <Store.Provider value={{state, dispatch}}>
-      {true ? (
-        <NavigationContainer>
-          {false ? (
-            <AuthStack />
-          ) : (
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}>
-              <Stack.Screen name="Home" component={TabNav} />
-              <Stack.Screen name="Details" component={Details} />
-              <Stack.Screen name="BamScreen" component={BamScreen} />
-            </Stack.Navigator>
-          )}
-        </NavigationContainer>
-      ) : (
-        <View>
-          <Text>SplashScreen</Text>
-        </View>
-      )}
+      <NavigationContainer>
+        {!state.isAuth ? (
+          <AuthStack />
+        ) : (
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <Stack.Screen name="Home" component={TabNav} />
+            <Stack.Screen name="Details" component={Details} />
+            <Stack.Screen name="BamScreen" component={BamScreen} />
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
     </Store.Provider>
+  ) : (
+    <View>
+      <Text>SplashScreen</Text>
+    </View>
   );
 };
 
