@@ -1,7 +1,7 @@
 {
     "name": "dragula",
     "version": "1.0.0",
-    "description": "Backend service Bamit",
+    "description": "Backend service Bamon",
     "author": "saranonearth",
     "license": "MIT",
     "scripts": {
@@ -29,6 +29,7 @@
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
         "@types/config": "0.0.34",
+        "@types/cors": "^2.8.12",
         "@types/express": "^4.16.1",
         "@types/gravatar": "^1.8.0",
         "@types/jsonwebtoken": "^8.3.2",

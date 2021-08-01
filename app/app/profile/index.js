@@ -65,7 +65,7 @@ export default function Profile({navigation}) {
             />
             <Text style={styles.name}>Hey, Saran</Text>
             <Text style={{color: '#fff'}}>Account Balance</Text>
-            <Text style={{color: '#fff', marginBottom: 10}}>₹200.00</Text>
+            <Text style={{color: '#fff', marginBottom: 10}}>₹300.00</Text>
             <View
               style={{
                 display: 'flex',
@@ -95,7 +95,7 @@ export default function Profile({navigation}) {
           <FlatList
             showsVerticalScrollIndicator={false}
             style={{flexGrow: 1}}
-            data={[{id: 'XVDNGJ', pocket_name: 'Piggy Pong', available: '200'}]}
+            data={[{id: 'XVDNGJ', pocket_name: 'Piggy Pong', available: '216'}]}
             keyExtractor={m => Math.random().toString()}
             renderItem={({item}) => (
               <PocketCompoment

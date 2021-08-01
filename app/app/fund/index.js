@@ -6,6 +6,9 @@ import Icon2 from 'react-native-vector-icons/Entypo';
 import UI from '../constants/UI';
 
 export default function Fund({navigation}) {
+  function handleCreate() {
+    navigation.navigate('Home');
+  }
   return (
     <View style={styles.container}>
       <View style={{marginHorizontal: 10, marginTop: 12}}>
@@ -26,13 +29,14 @@ export default function Fund({navigation}) {
           label="Pocket Name"
           containerStyle={{marginTop: 20, marginLeft: -10}}
           inputContainerStyle={styles.amountInput}
-          placeholder="Piggy Pong"
-          inputStyle={{fontSize: 30, fontWeight: 'bold34'}}
+          placeholder="My pocket"
+          inputStyle={{fontSize: 30, fontWeight: 'bold'}}
         />
         <Input
+          keyboardType={'numeric'}
           inputContainerStyle={styles.amountInput}
           placeholder="0"
-          inputStyle={{fontSize: 30, fontWeight: 'bold34'}}
+          inputStyle={{fontSize: 30, fontWeight: 'bold'}}
           leftIcon={
             <Text style={{fontSize: 40, color: UI.GREY, marginTop: -5}}>₹</Text>
           }
@@ -47,7 +51,7 @@ export default function Fund({navigation}) {
             width: '80%',
             marginBottom: 100,
           }}>
-          <TouchableOpacity style={styles.bamButton}>
+          <TouchableOpacity onPress={handleCreate} style={styles.bamButton}>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>
               Create
               <Icon2 size={15} name="chevron-right" />

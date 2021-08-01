@@ -1,36 +1,60 @@
-import { Document, Model, model, Schema } from "mongoose";
+import { Document, Model, model, Schema } from 'mongoose'
 
-/**
- * Interface to model the User Schema for TypeScript.
- * @param email:string
- * @param password:string
- * @param avatar:string
- */
-export interface IUser extends Document {
-  email: string;
-  password: string;
-  avatar: string;
+export interface Payback {
+  pocketId: Schema.Types.ObjectId
+  amount: number
+  transactionId: Schema.Types.ObjectId
 }
 
-const userSchema: Schema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  avatar: {
-    type: String
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
-});
+export interface IUser extends Document {
+  email: string
+  password: string
+  name: string
+  accountNo: Schema.Types.ObjectId
+  payBack: Payback
+  bamedout: number
+}
 
-const User: Model<IUser> = model("User", userSchema);
+const userSchema: Schema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    accountNo: {
+      type: Schema.Types.ObjectId,
+      ref: 'Account',
+    },
+    bamedout: {
+      type: Number,
+      default: 0,
+    },
+    payBack: {
+      pocketId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Pocket',
+      },
+      amount: {
+        type: Number,
+      },
+      transactionId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Transaction',
+      },
+    },
+  },
+  { timestamps: true },
+)
 
-export default User;
+const User: Model<IUser> = model('User', userSchema)
+
+export default User

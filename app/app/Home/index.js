@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import UI from '../constants/UI';
 import {Text as Texti} from 'react-native-elements';
+import Store from '../Store/Store';
 
 const PocketCompoment = ({data, handleBamPress}) => (
   <View style={styles.pocketContainer}>
@@ -33,6 +34,9 @@ const PocketCompoment = ({data, handleBamPress}) => (
 
 export default function Home({navigation}) {
   const [bamToggle, setBamToggle] = React.useState(true);
+
+  const {state} = React.useContext(Store);
+  console.log('STATEE', state);
 
   function handleBamPress() {
     navigation.navigate('BamScreen', {
@@ -68,12 +72,12 @@ export default function Home({navigation}) {
                 {bamToggle ? (
                   <>
                     <Text style={styles.text}>You've Bammed In</Text>
-                    <Text style={styles.value}>₹200.00</Text>
+                    <Text style={styles.value}>₹{state.bammedin}.00</Text>
                   </>
                 ) : (
                   <>
                     <Text style={styles.text}>You've Bammed Out</Text>
-                    <Text style={styles.value}>₹0.00</Text>
+                    <Text style={styles.value}>₹{state.bammedout}.00</Text>
                   </>
                 )}
               </View>

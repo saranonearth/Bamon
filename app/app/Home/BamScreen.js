@@ -4,10 +4,55 @@ import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import UI from '../constants/UI';
+import Store from '../Store/Store';
 
 export default function BamScreen({route, navigation}) {
+  const {state, dispatch} = React.useContext(Store);
   const {otherParam} = route.params;
   const payback_mode = otherParam.payback_mode;
+
+  const [amount, setAmount] = React.useState(0);
+
+  function handleAmountInput(e) {
+    if (Number(e) > 500) return;
+    setAmount(Number(e));
+  }
+  function handleBam(type) {
+    if (type === 'bam') {
+      dispatch({
+        type: 'BAMIN',
+        payload: Number(200.0),
+      });
+      navigation.navigate('Home');
+    }
+    if (type == 'pay') {
+      dispatch({
+        type: 'BAMIN',
+        payload: Number(0.0),
+      });
+      navigation.navigate('Home');
+    }
+  }
+
+  function fixedAmount(amount) {
+    if (amount == 0) {
+      return 0;
+    } else if (amount > 0 && amount <= 100) {
+      return 8;
+    } else if (amount >= 101 && amount <= 200) {
+      return 16;
+    } else if (amount >= 201 && amount <= 300) {
+      return 32;
+    } else if (amount >= 301 && amount <= 400) {
+      return 32;
+    } else if (amount >= 401 && amount <= 500) {
+      return 40;
+    } else {
+      return 40;
+    }
+  }
+
+  console.log(Number(amount) + fixedAmount(amount));
 
   return (
     <View style={styles.container}>
@@ -26,18 +71,19 @@ export default function BamScreen({route, navigation}) {
           {payback_mode ? 'You will have to' : 'You will be'}
         </Text>
         <Text style={styles.infoText}>
-          {payback_mode ? `pay ₹200` : 'bamming out.'}
+          {payback_mode ? `pay ₹218` : 'bamming out.'}
         </Text>
         <Text style={styles.subText}>
           {payback_mode
             ? 'Pocket: Piggy Pong'
-            : 'Available in this Pocket: ₹200.00'}
+            : 'Available in this Pocket: ₹1300.00'}
         </Text>
         {!payback_mode && (
           <Input
             containerStyle={{marginTop: 20}}
             inputContainerStyle={styles.amountInput}
             placeholder="0"
+            onChangeText={handleAmountInput}
             inputStyle={{fontSize: 30, fontWeight: 'bold'}}
             leftIcon={
               <Text style={{fontSize: 40, color: UI.GREY, marginTop: -5}}>
@@ -68,7 +114,7 @@ export default function BamScreen({route, navigation}) {
                   fontSize: 19,
                   color: '#fff',
                 }}>
-                ₹200 in next 15 days.
+                {`${Number(amount) + fixedAmount(amount)} in next 15 days.`}
               </Text>
             </>
           )}
@@ -83,7 +129,9 @@ export default function BamScreen({route, navigation}) {
             width: '80%',
             marginBottom: 20,
           }}>
-          <TouchableOpacity style={styles.bamButton}>
+          <TouchableOpacity
+            onPress={() => (payback_mode ? handleBam('pay') : handleBam('bam'))}
+            style={styles.bamButton}>
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>
               {payback_mode ? 'Pay' : 'Bam'}
               <Icon2 size={15} name="chevron-right" />
