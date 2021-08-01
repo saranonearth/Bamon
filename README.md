@@ -1,4 +1,4 @@
-# Bamon
+# Bamon🚀
 Democratized micro-lending platform 💸🚀
 
 ![New Project(2)](https://user-images.githubusercontent.com/44068102/127772508-2ab49222-f41a-40ed-ba4f-0b9d89812d44.jpg)
